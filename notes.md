@@ -53,4 +53,39 @@ MODULES and ROUTES:
 NOTERIOUS ROUTES:
 -Instantiate ng-app on HTML Tag
   -Do not put in the HEAD Tag
--
+-Has modules including 'ui.router', 'ngAnimate', 'firebase', 'noterious.common', 'gridster'
+-For state, have resolve, requires authorization
+-If something goes wrong, get redirected to login
+-What do I want to go navigate to and what the template and controller I'd like to us.
+-Testing:
+
+BASIC ROUTING EXAMPLE:
+-Use ui-sref to get substate
+
+TESTING:
+-Extremely well suited for testing because state is separated from the DOM
+-Unit testing is done with Karma (when developing Feature)
+-E2E testing done with Protractor (when Feature complete, make sure it works in relation with entire application)
+-People used to jQuery, attaching listeners to DOM, and updates DOM accordingly
+-With Angular separating the declarative markup and imperative logic aka easier to test
+-The majority of pain when testing in Angular will come from ceremony and not actual testing, aka setting up Karma and whatever you want to test
+-When you have state or route change, you lose state. ng-view or ui-view will redraw template. You lose state. If you need anything to persist, you need to put into a service or a model.
+-Services are independent on Routes. Inject it into Controller when need it (View Model for that View)(Services are the big M)
+-You can put things into local storage. For example if you have a O-Auth, you would need to store that.
+  -Stored last route into local storage (AngularStorage is a great library)
+  -Identity Management is really hard so export it when you can.
+  -$cookie is not that great.
+
+CHALLENGE 1:
+-Checkout 01-architecture branch
+-Create the file structure for the boards Feature
+-Create a boards route
+-Write a unit test for the boards route
+-For Large Teams have additional folders like Controller etc within each Feature
+  -Heplful to for Future Team Members
+  -Organized by High Level and separated by Type
+  -Alternatively you can nest Features
+-How do you test nested state?
+-PhantomJS is a web browser without a GUI (Useful because of Javascript API)
+  -Tool for Unit testing
+  -Shows results in command line. Mocha and Casper are based on it.
