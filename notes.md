@@ -82,10 +82,24 @@ CHALLENGE 1:
 -Create a boards route
 -Write a unit test for the boards route
 -For Large Teams have additional folders like Controller etc within each Feature
-  -Heplful to for Future Team Members
+  -Helpful to for Future Team Members
   -Organized by High Level and separated by Type
   -Alternatively you can nest Features
 -How do you test nested state?
 -PhantomJS is a web browser without a GUI (Useful because of Javascript API)
   -Tool for Unit testing
   -Shows results in command line. Mocha and Casper are based on it.
+
+~VIEWS AND CONTROLLERS~
+
+VIEWS:
+-Views are the DOM after it has been compiled by Angular
+-Angular uses templating to encapsulate complex functionality into simple, declarative markup
+-The view is primarily responsible for two tasks: displaying model state and conveying interactions
+
+CONTROLLERS:
+-Responsible for constructing and maintaining the model for a view to interact with.
+-Should be very lightweight and have just enough functionality to satisfy the view.
+-Ideally a controller would consume data from a service and then delegate any responsibility to manipulate that data back to that service.
+  -Defer any business logic
+  -Sort of an Air Traffic Controller
