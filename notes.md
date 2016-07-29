@@ -109,3 +109,28 @@ CONTROLLER AS SYNTAX:
 -Controller as was introduced to provide a more explicit syntax for declaring methods and properties.
 -Angular creates a property on $scope and assigns the instance of the controller to it.
 -ng-controller = "MainCtrl as main" results in $scope.main = new MainCtrl()
+-Properties and Methods:
+  -Properties on Controller are just JS Objects (Don't need to wrap it)
+  -Ultimately it comes down to properly exposing properties and methods on the controller to the view
+  -Plenty of built-in directives to make interacting with the view a lot easier.
+  -A Controller should never know about the view it controls.
+
+NGMODEL & NGSUBMIT:
+-For example in a Form:
+  -Create name="" in <form
+    -Example being name="main.userForm" ng-submit="main.submitUser(main.user)"
+      -In script.js:
+        -main.submitUser = function(user) {
+          main.currentUser = user;
+        }
+    -Bind it to View to see state.    
+  -Then for ngModel:
+    -ng-model="main.user.name"
+-Can have required="true"
+
+NG-REPEAT & NG-CLICK:
+-For collections
+-ng-repeat="item in main.items" ng-click="main.setCurrentItem"
+-Scope is very good about maintaining context
+  -Essentially creates a child scope for every item in the collection
+-
