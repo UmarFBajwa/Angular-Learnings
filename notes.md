@@ -133,4 +133,149 @@ NG-REPEAT & NG-CLICK:
 -ng-repeat="item in main.items" ng-click="main.setCurrentItem"
 -Scope is very good about maintaining context
   -Essentially creates a child scope for every item in the collection
--
+-With Angular 2, scope is going away. By reducing dependency to explicitly call scope helps us get use to it.
+-Controller as create this.
+
+CHALLENGE 2:
+-Using Filters come with a performance hit, esp if complex objects.
+  -Goes through everything...
+-If you define custom filter in Controller and thus can optimize (Very much like a service)
+
+CHALLENGE 2 SOLUTION:
+-SuperTab
+-In real life is ui-router, create edit and create state.
+  -However don't jump too far in deep end.
+-isValid = $valid
+
+~SERVICES~
+
+SERVICES:
+-Provide common functionality across your entire application.
+-Services are essentially the Model in the MVW.
+-Keep your Controllers skinny so that your Models can be fat.
+-Term 'service' is totally overloaded.
+-Services can consume services.
+-Persistent across entire application. Great for persistent data.
+-Okay to start in a controller and promote to a service as necessary.
+
+TESTING SERVICES:
+-Service instantiated using constructor function hence you get this.
+-Factory is just an object with properties.
+-Model actually communicates with server.
+-Use 'NAMEModel' as a naming convention.
+-If performing just common functionality call it 'NAMEService'
+
+PROMISES:
+-Allow us to perform asynchronous operations.
+-Basically inversion of using callbacks.
+-Then, Catch, Finally.
+-Built into some services but you can manually control promises via the $q service.
+-When completed, promise is solved.
+-Metaphor: When you go to a restaurant, waiting for table and get a beeper. You know when the beeper goes off, you know something will happen. When it does, you exchange the beeper for a table. It's a beeper.
+-Instead of using then and success.
+-Also can use update (has to do with progress indicator)
+
+$HTTP SERVICE
+-Copy ...
+-Enables communication with remote servers over the HTTP protocol.
+  -Only need to know endpoints.
+-Has convenience methods that are modeled after the RESTful verbs.
+-Built on top of the promise api.
+-Use constant service to extract endpoint out.
+  -.constant('ENDPOINT_URI', 'items.json')
+-But then extracts the data only
+  -function extract(result){
+    return result.data;
+  }
+  -function getItems() {
+    return $http.get(ENDPOINT_URI).then(extract);
+  }
+-If you want to cache, would use $q
+-Anytime you need to transform or do some business logic than use $q
+
+CRUD EXAMPLE:
+
+CHALLENGE 3:
+
+
+CHALLENGE 3 SOLUTION:
+-First in Model:
+  -service.all = function() {
+    var deferred = $q.defer;
+
+    deferred.resolve(boards);
+
+    return deferred.promise;
+  }
+-Endpoint and payload. Matching up with verb and promises.
+-Another branch for more complex
+
+~DIRECTIVES~
+
+DIRECTIVES:
+-Allows us to express custom functionality through custom HTML tags and attributes
+-Essentially take semantic markup to a whole new level; turn our HTML in a DSL.
+-Trying to be a shim for the future.
+-Not the best API and learned lesson for Angular 2.
+-In the case of ng-animations you can do CSS defined directives.
+-Link to DOM, Controller is , DDO is Directive Definition Object
+-Directives are like mini Applications
+-Example:
+  -In index.html
+  <div item ng-repeat="item in main.items"></div>
+  -In script.js
+  .directive('item', function(){
+      return {
+        replace: true,
+        templateURL: 'item.tmpl.html'
+      }
+  })
+-Make sure you do snake-case
+
+LINK:
+-Handy for DOM manipulation
+
+CONTROLLER FUNCTION:
+-Angular 2 wants to support web components
+
+CHALLENGE 4:
+
+CHALLENGE 4 SOLUTION:
+
+ISOLATED SCOPE:
+-This is how ng-click works.
+
+~ROUTING~
+
+ROUTES AND STATES:
+-Ui-router allows us to have named views as well as the ability to nest views.
+-Application becomes state machine; we can update the portion we want to specifically.
+-$stateParams Service sends parameters between states
+  -Activate a state through three different mechanisms: navigate to URL, the ui-ref directive or the $state service
+
+THE $STATEPARAMS SERVICE:
+-$state Service allows us to navigate to states as well as pass parameters along.
+-Has a useful API for getting information about the configuration of the state you are currently in.
+
+CHALLENGE 5:
+
+CHALLENGE 5 SOLUTION:
+
+~WRAP-UP~
+
+APPLYING WHAT YOU'VE LEARNED:
+-By separating controllers and views, you can have one controller control multiple views.
+-Check out Ionic (For IG clone)
+
+RESOURCES:
+-How would put a build process in place. Automation is key.
+-Grunt or or Gulp or Webpack.
+-Then it comes down resource management, to Browserify or Require.JS.
+-Will integrate to Master with Tutorials.
+-How to prevent controller scope creep. Recommends using iffys but not needed according to teacher.
+-Ionic is amazing. Repo.
+-How would you handle routing using ui-router of something large. Look at architecture and understand what is in each folder. Separate features into sub-modules. Within each module manage state definitions for each. Maybe look at a service to handle all of this.
+-Server side routing not needed anymore.
+-What about SEO? Isomorphic JS
+-Use Word Press for Static Applications.
+-Bower is a dumb animal. Project File gets too big. Use CDN. Use NPM quite often. 
