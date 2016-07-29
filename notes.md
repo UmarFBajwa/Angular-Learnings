@@ -103,3 +103,9 @@ CONTROLLERS:
 -Ideally a controller would consume data from a service and then delegate any responsibility to manipulate that data back to that service.
   -Defer any business logic
   -Sort of an Air Traffic Controller
+
+CONTROLLER AS SYNTAX:
+-$scope prototypically inherits from its parent scope all the way to $rootScope; not a Feature.
+-Controller as was introduced to provide a more explicit syntax for declaring methods and properties.
+-Angular creates a property on $scope and assigns the instance of the controller to it.
+-ng-controller = "MainCtrl as main" results in $scope.main = new MainCtrl()
